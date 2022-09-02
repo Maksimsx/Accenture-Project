@@ -13,6 +13,9 @@ public class MyAccount extends AppCompatActivity {
     // One Button
     Button BSelectImage;
 
+    DBHelper dbHelper;
+
+
     // One Preview Image
     ImageView IVPreviewImage;
 
@@ -25,6 +28,8 @@ public class MyAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
 
+        dbHelper = new DBHelper(this);
+
         // register the UI widgets with their appropriate IDs
         BSelectImage = findViewById(R.id.BSelectImage);
         IVPreviewImage = findViewById(R.id.IVPreviewImage);
@@ -35,6 +40,7 @@ public class MyAccount extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 imageChooser();
+                saveImage();
             }
         });
     }
@@ -73,4 +79,10 @@ public class MyAccount extends AppCompatActivity {
             }
         }
     }
+
+    private void saveImage(){
+        String path = IVPreviewImage.getContext().getPackageResourcePath();
+        dbHelper.addPicture(path);
+    }
+
 }

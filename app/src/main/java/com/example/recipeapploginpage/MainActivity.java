@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText username, password;
     private Button loginBtn, registerBtn;
     private DBHelper DBHelper;
+    private TextView forgotPassword;
 
 
     @Override
@@ -27,9 +28,11 @@ public class MainActivity extends AppCompatActivity {
         password = findViewById(R.id.editTextTextPassword);
         loginBtn = findViewById(R.id.btnLogin);
         registerBtn = findViewById(R.id.btnMoveRegister);
+        forgotPassword = findViewById(R.id.txtForgotPassword);
 
         goToRegister();
         login();
+        returnForgotPassword();
     }
 
 
@@ -64,5 +67,15 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
+    }
+
+    private void returnForgotPassword(){
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ForgotPaassword.class);
+                startActivity(intent);
+            }
+        });
     }
 }

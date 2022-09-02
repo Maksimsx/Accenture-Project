@@ -21,6 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL2 = "EMAIL";
     public static final String COL3 = "USERNAME";
     public static final String COL4 = "PASSWORD";
+    public static final String COL5 = "PICTURE";
 
 
     public DBHelper(Context context) {
@@ -34,7 +35,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COL2 + " TEXT," +
                 COL3 + " TEXT," +
-                COL4 + " TEXT)";
+                COL4 + " TEXT," +
+                COL5 + " BLOB)";
         db.execSQL(createTable);
 
     }
@@ -79,4 +81,19 @@ public class DBHelper extends SQLiteOpenHelper {
             return false;
         }
     }
+
+    public boolean addPicture(String dbPicture){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL5, dbPicture);
+
+        long result = db.insert(TABLE_NAME, null, contentValues);
+
+        if(result == -1){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
 }
